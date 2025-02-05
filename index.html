@@ -5,257 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <style>
-    body, html {
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #1a1a1a;
-    position: fixed;
-    left: -250px;
-    transition: left 0.3s ease-in-out;
-}
-
-.sidebar.open {
-    left: 0;
-}
-
-.main-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: calc(100vw - 250px);
-    transition: margin-left 0.3s ease-in-out;
-}
-
-.sidebar.open + .main-content {
-    margin-left: 250px;
-}
-
-
-        .sidebar img {
-            width: 120px;
-            height: 120px;
-            border-radius: 10px;
-            object-fit: cover;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease-in-out;
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .sidebar img:hover {
-            transform: scale(1.1);
-        }
-
-        .sidebar h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-            margin: 10px 0;
-            display: block;
-            text-align: center;
-            cursor: pointer;
-            transition: color 0.3s, transform 0.2s;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-        }
-
-        .sidebar a:hover {
-            color: #f39c12;
-            transform: scale(1.1);
-        }
-
-        .main-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: margin-left 0.3s ease-in-out;
-            background: url('big.jpg') no-repeat center center;
-            background-size: cover;
-            height: 100vh;
-            width: calc(100vw - 250px);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .sidebar.open + .main-content {
-    margin-left: 250px;
-}
-
-        .overlay {
-            background: rgba(0, 0, 0, 0.5);
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-            padding-left: 50px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s forwards;
-        }
-
-        .overlay h1 {
-            font-size: 48px;
-            font-weight: bold;
-            animation: fadeInUp 1s ease-in-out forwards;
-        }
-
-        .overlay p {
-            font-size: 24px;
-            color: #ccc;
-            animation: fadeInUp 1.2s ease-in-out forwards;
-        }
-
-        /* About Section */
-        .about-section {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: calc(100vw - 250px);
-            background: linear-gradient(135deg, #1a1a1a, #333);
-            color: white;
-            text-align: center;
-            padding: 50px;
-            position: relative;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-
-        .about-content {
-            max-width: 700px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            transform: translateY(20px);
-            transition: transform 0.5s ease-in-out;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Active Section Transition */
-        .active-section {
-            display: flex !important;
-            opacity: 1 !important;
-            transform: scale(1) !important;
-        }
-
-        .projects-section {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 50px;
-        width: calc(100vw - 250px);
-        background: #1a1a1a;
-        color: white;
-        height: 100vh;
-        overflow-y: auto;
-    }
-
-    #projects-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 20px;
-        width: 80%;
-    }
-
-    .project-tile {
-        background: #333;
-        padding: 20px;
-        border-radius: 10px;
-        transition: transform 0.3s, background 0.3s;
-        cursor: pointer;
-    }
-
-    .project-tile h3 {
-    font-size: 18px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-}
-
-
-    .project-tile:hover {
-        transform: scale(1.05);
-        background: #444;
-    }
-
-
-    .project-tile h3:hover {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-}
-
-body, html {
+        body, html {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #1a1a1a;
             color: white;
             display: flex;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+            flex-direction: column;
+            height: 100%;
+            overflow: auto;
         }
 
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: white;
-            font-size: 24px;
-            z-index: 1000;
-        }
-
+        /* Sidebar */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -313,7 +82,61 @@ body, html {
             transform: scale(1.1);
         }
 
-        .main-content {
+        /* Menu Toggle */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 24px;
+            z-index: 1000;
+        }
+
+        /* Main Container */
+        .main-container {
+            flex: 1;
+            margin-left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .sidebar.open + .main-container {
+            margin-left: 250px;
+            width: calc(100vw - 250px);
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            transition: opacity 0.5s, transform 0.5s;
+            opacity: 0;
+            transform: scale(0.95);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .active-section {
+            display: flex !important;
+            opacity: 1 !important;
+            transform: scale(1) !important;
+        }
+
+        /* Home Section */
+        .home-section .main-content {
             flex: 1;
             display: flex;
             align-items: center;
@@ -340,6 +163,112 @@ body, html {
             animation: fadeInUp 1s forwards;
         }
 
+        .overlay h1 {
+            font-size: 48px;
+            font-weight: bold;
+            animation: fadeInUp 1s ease-in-out forwards;
+        }
+
+        .overlay p {
+            font-size: 24px;
+            color: #ccc;
+            animation: fadeInUp 1.2s ease-in-out forwards;
+        }
+
+        /* About Section */
+        .about-section {
+            height: auto;  /* Let content determine height */
+            padding: 80px 50px; /* Add padding to prevent cutoff */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 700px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            justify-content: center;
+        }
+
+        .about-content h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 50px 5%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers everything */
+        }
+
+        #projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Makes it more uniform */
+            gap: 25px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        .project-tile {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .project-tile h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #f39c12;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        .projects-section h2 {
+            width: 100%;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .project-tile p {
+            font-size: 16px;
+            color: #ccc;
+        }
+
+        .project-tile:hover h3 {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: unset;
+        }
+
+        /* Animations */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -362,183 +291,49 @@ body, html {
             }
         }
 
-        /* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* Responsive Design */
+        @media (max-width: 375px) {
+            .sidebar {
+                width: 200px;
+                left: -200px;
+            }
 
-body, html {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a;
-    color: white;
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-}
+            .sidebar.open {
+                left: 0;
+            }
 
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #1a1a1a;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    left: -250px;
-    top: 0;
-    transition: left 0.3s ease-in-out;
-    z-index: 999;
-}
+            .menu-toggle {
+                font-size: 20px;
+                top: 15px;
+                left: 15px;
+            }
 
-.sidebar.open {
-    left: 0;
-}
+            .about-section {
+                width: 100%;
+                margin-left: 0;
+                padding-top: 120px;
+                padding-bottom: 50px;
+                height: auto;
+            }
 
-/* Menu Toggle */
-.menu-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: white;
-    font-size: 24px;
-    z-index: 1000;
-}
+            .main-content, .projects-section {
+                width: 100%;
+                margin-left: 0;
+            }
 
-/* Main Container */
-.main-container {
-    flex: 1;
-    margin-left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: margin-left 0.3s ease-in-out;
-}
+            .overlay h1 {
+                font-size: 32px;
+            }
 
-.sidebar.open + .main-container {
-    margin-left: 250px;
-    width: calc(100vw - 250px);
-}
+            .overlay p {
+                font-size: 18px;
+            }
 
-/* Sections (Ensuring Proper Alignment) */
-.section {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg, #1a1a1a, #333);
-    transition: opacity 0.5s, transform 0.5s;
-    opacity: 0;
-    transform: scale(0.95);
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-/* Active Section */
-.active-section {
-    display: flex !important;
-    opacity: 1 !important;
-    transform: scale(1) !important;
-}
-
-/* About Section */
-.about-section,
-.projects-section {
-    width: 100%;
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* About Content Box */
-.about-content {
-    max-width: 700px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-}
-
-/* Projects Section */
-.projects-section {
-    overflow-y: auto;
-}
-
-#projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    width: 80%;
-}
-
-/* Project Tile */
-.project-tile {
-    background: #333;
-    padding: 20px;
-    border-radius: 10px;
-    transition: transform 0.3s, background 0.3s;
-    cursor: pointer;
-    text-align: center;
-}
-
-.about-content h2 {
-    font-size: 28px; 
-    margin-bottom: 15px; 
-    line-height: 1.5;
-}
-
-.about-content p {
-    font-size: 18px;
-    line-height: 1.8;
-    text-align: justify;
-    margin-bottom: 15px;
-}
-
-.project-tile:hover {
-    transform: scale(1.05);
-    background: #444;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
+            .project-tile {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -554,7 +349,7 @@ body, html {
         <a href="https://github.com/TGMadhusoodhan" target="_blank">Github</a>
         <a href="https://www.linkedin.com/in/madhusoodhan-girinarayanan-574573214/" target="_blank">Contact</a>
     </div>
-    
+
     <!-- Home Section -->
     <section id="home" class="home-section active-section">
         <div class="main-content">
@@ -578,6 +373,7 @@ body, html {
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="projects-section">
         <h2>My Hall of Fame</h2>
         <div id="projects-container"></div>
@@ -590,6 +386,7 @@ body, html {
                 section.classList.remove("active-section");
                 section.style.opacity = "0";
                 section.style.transform = "scale(0.95)";
+                section.style.visibility = "hidden";
                 setTimeout(() => {
                     section.style.display = "none";
                 }, 500);
@@ -598,53 +395,40 @@ body, html {
             let activeSection = document.getElementById(sectionId);
             setTimeout(() => {
                 activeSection.style.display = "flex";
+                activeSection.style.visibility = "visible";
                 setTimeout(() => {
                     activeSection.classList.add("active-section");
                 }, 10);
             }, 500);
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const aboutBtn = document.getElementById("about-btn");
-    const projectsBtn = document.getElementById("projects-btn");
-    const aboutSection = document.querySelector(".about-section");
-    const projectsSection = document.querySelector(".projects-section");
-    
-    aboutBtn.addEventListener("click", function() {
-        aboutSection.classList.add("active-section");
-        projectsSection.classList.remove("active-section");
-    });
+        async function fetchGitHubProjects() {
+            try {
+                const response = await fetch('https://api.github.com/users/TGMadhusoodhan/repos?sort=updated&per_page=9');
+                const repos = await response.json();
+                const container = document.getElementById('projects-container');
+                container.innerHTML = '';
 
-    projectsBtn.addEventListener("click", function() {
-        projectsSection.classList.add("active-section");
-        aboutSection.classList.remove("active-section");
-    });
+                repos.forEach(repo => {
+                    const tile = document.createElement('div');
+                    tile.className = 'project-tile';
+                    tile.innerHTML = `<h3>${repo.name}</h3><p>${repo.description || 'No description available'}</p>`;
+                    tile.onclick = () => window.open(repo.html_url, '_blank');
+                    container.appendChild(tile);
+                });
+            } catch (error) {
+                console.error('Error fetching GitHub projects:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchGitHubProjects();
         });
 
-        async function fetchGitHubProjects() {
-    const response = await fetch('https://api.github.com/users/TGMadhusoodhan/repos?sort=updated&per_page=9');
-    const repos = await response.json();
-    const container = document.getElementById('projects-container');
-    container.innerHTML = '';
-
-    repos.forEach(repo => {
-        const tile = document.createElement('div');
-        tile.className = 'project-tile';
-        tile.innerHTML = `<h3>${repo.name}</h3><p>${repo.description || 'No description available'}</p>`;
-        tile.onclick = () => window.open(repo.html_url, '_blank');
-        container.appendChild(tile);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    fetchGitHubProjects();
-});
-
-function toggleMenu() {
+        function toggleMenu() {
             const sidebar = document.querySelector('.sidebar');
             sidebar.classList.toggle('open');
         }
-
     </script>
 </body>
 </html>
