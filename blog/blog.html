@@ -543,8 +543,9 @@
         @media (max-width: 768px) {
             .blog-container {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 5rem 1rem 2rem;
+                gap: 1rem;
+                padding: 6rem 0.8rem 2rem;
+                max-width: 100%;
             }
 
             .nav-content {
@@ -601,10 +602,12 @@
             .blog-sidebar {
                 order: 2;
                 position: static;
+                margin-top: 1rem;
             }
 
             .sidebar-content {
-                padding: 1.5rem;
+                padding: 1.2rem;
+                margin: 0;
             }
 
             .sidebar-content h4 {
@@ -618,18 +621,23 @@
             }
 
             .blog-content {
-                padding: 2rem 1.5rem;
+                padding: 1.5rem 1rem;
+                margin: 0;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             .post-title {
-                font-size: 2.2rem;
-                line-height: 1.1;
+                font-size: 1.8rem;
+                line-height: 1.2;
                 margin-bottom: 1rem;
+                text-align: center;
             }
 
             .post-meta {
                 font-size: 1rem;
                 margin-bottom: 1.5rem;
+                text-align: center;
             }
 
             .post-content {
@@ -638,15 +646,19 @@
             }
 
             .post-content h1 {
-                font-size: 2rem;
+                font-size: 1.6rem;
+                text-align: center;
+                margin: 1.5rem 0 1rem 0;
             }
 
             .post-content h2 {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
+                margin: 1.5rem 0 1rem 0;
             }
 
             .post-content h3 {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
+                margin: 1.3rem 0 1rem 0;
             }
 
             .post-content p {
@@ -674,16 +686,75 @@
                 padding: 0.8rem 1.5rem;
                 margin: 1.5rem 0;
             }
+
+            .blog-tiles {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0;
+            }
+
+            .blog-tile {
+                padding: 1.8rem;
+                margin: 0;
+            }
+
+            .blog-tiles-container {
+                padding: 0;
+                margin: 0;
+                text-align: center;
+            }
+
+            .blog-tiles-container h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .blog-tile-title {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .blog-tile-meta {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .blog-tile-excerpt {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .blog-tile-tags {
+                gap: 0.5rem;
+                justify-content: center;
+            }
+
+            .blog-tag {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+            }
         }
 
         @media (max-width: 480px) {
+            .nav-content {
+                padding: 0 1rem;
+            }
+
             .blog-container {
-                padding: 4rem 0.8rem 1.5rem;
+                padding: 5rem 1rem 2rem;
                 gap: 1rem;
+                max-width: 100%;
             }
 
             .sidebar-content {
                 padding: 1.2rem;
+                border-radius: 12px;
+            }
+
+            .blog-content {
+                padding: 1.5rem 1rem;
+                border-radius: 12px;
             }
 
             .blog-tiles {
@@ -692,53 +763,115 @@
             }
 
             .blog-tile {
-                padding: 1.2rem;
+                padding: 1.5rem;
+                border-radius: 12px;
+                margin-bottom: 0.5rem;
             }
 
             .blog-tiles-container h2 {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .blog-tiles-container h2::after {
+                width: 60px;
+                height: 3px;
             }
 
             .blog-tile-title {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
+                margin-bottom: 0.8rem;
             }
 
-            .blog-content {
-                padding: 1.5rem 1rem;
+            .blog-tile-meta {
+                font-size: 0.85rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .blog-tile-excerpt {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+            }
+
+            .blog-tile-tags {
+                justify-content: flex-start;
+                gap: 0.4rem;
+            }
+
+            .blog-tag {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.6rem;
             }
 
             .post-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
             }
 
             .post-meta {
                 font-size: 0.9rem;
+                margin-bottom: 1.2rem;
             }
 
             .post-content {
                 font-size: 0.95rem;
+                line-height: 1.6;
             }
 
             .post-content h1 {
-                font-size: 1.7rem;
+                font-size: 1.5rem;
+                margin: 1.5rem 0 1rem 0;
+                text-align: left;
             }
 
             .post-content h2 {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
+                margin: 1.3rem 0 0.8rem 0;
             }
 
             .post-content h3 {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+                margin: 1.2rem 0 0.8rem 0;
+            }
+
+            .post-content p {
+                margin-bottom: 1rem;
+                text-align: left;
             }
 
             .post-content pre {
-                padding: 0.8rem;
+                padding: 1rem;
                 font-size: 0.85rem;
+                border-radius: 8px;
+                margin: 1.2rem 0;
+            }
+
+            .post-content code {
+                font-size: 0.85rem;
+                padding: 0.2rem 0.4rem;
             }
 
             .post-content blockquote {
-                padding: 0.6rem 1rem;
+                padding: 0.8rem 1rem;
                 font-size: 0.9rem;
+                margin: 1.2rem 0;
+                border-radius: 0 6px 6px 0;
+            }
+
+            .post-content ul, .post-content ol {
+                padding-left: 1.2rem;
+                margin: 1rem 0;
+            }
+
+            .post-content li {
+                margin-bottom: 0.6rem;
+            }
+
+            .blog-post-header {
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
             }
         }
     </style>
