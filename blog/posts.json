@@ -1,0 +1,11 @@
+{
+  "posts": [
+    {
+      "title": "Hello World",
+      "slug": "hello-world",
+      "date": "2024-01-15",
+      "excerpt": "My first blog post - welcome to my blog!",
+      "category": "General"
+    }
+  ]
+}

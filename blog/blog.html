@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Madhusoodhan's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0b0f;
+            --bg-secondary: #12141b;
+            --bg-panel: #1a1d29;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent: #f39c12;
+            --border: #2a2e3f;
+            --card-bg: rgba(26, 29, 41, 0.8);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #fafbfc;
+            --bg-secondary: #ffffff;
+            --bg-panel: #f1f3f5;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --accent: #e67e22;
+            --border: #cbd5e0;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .nav-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        [data-theme="light"] .nav-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-brand img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-brand h1 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        /* Mobile Menu Toggle - Hidden by default */
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+        }
+
+        .blog-sidebar {
+            position: sticky;
+            top: 6rem;
+            height: fit-content;
+        }
+
+        .sidebar-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #9b59b6, var(--accent));
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .sidebar-content {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .sidebar-content::before {
+            background: linear-gradient(90deg, #e67e22, #9b59b6, #e67e22);
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .sidebar-content h4 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+        }
+
+        .sidebar-content h4::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), #9b59b6);
+            margin: 0.8rem auto;
+            border-radius: 2px;
+        }
+
+        .post-list {
+            margin-bottom: 2rem;
+        }
+
+        .post-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .post-link:hover::before {
+            left: 100%;
+        }
+
+        .post-link:hover, .post-link.active {
+            color: var(--accent);
+            background: rgba(243, 156, 18, 0.05);
+            transform: translateX(5px);
+            border-color: var(--accent);
+        }
+
+        .blog-content {
+            background: linear-gradient(135deg, var(--card-bg), rgba(243, 156, 18, 0.03));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #9b59b6, #e74c3c, var(--accent));
+            animation: blogShimmer 4s ease-in-out infinite;
+        }
+
+        [data-theme="light"] .blog-content {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .blog-content::before {
+            background: linear-gradient(90deg, #e67e22, #9b59b6, #e74c3c, #e67e22);
+        }
+
+        @keyframes blogShimmer {
+            0%, 100% {
+                opacity: 0.8;
+                background: linear-gradient(90deg, var(--accent), #9b59b6, #e74c3c, var(--accent));
+            }
+            25% {
+                opacity: 1;
+                background: linear-gradient(90deg, #9b59b6, #e74c3c, var(--accent), #9b59b6);
+            }
+            50% {
+                opacity: 0.9;
+                background: linear-gradient(90deg, #e74c3c, var(--accent), #9b59b6, #e74c3c);
+            }
+            75% {
+                opacity: 1;
+                background: linear-gradient(90deg, var(--accent), #9b59b6, #e74c3c, var(--accent));
+            }
+        }
+
+        .blog-post-header {
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+
+        .post-title {
+            font-size: 3rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .post-meta {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .post-content h1, .post-content h2, .post-content h3 {
+            color: var(--accent);
+            margin: 2.5rem 0 1.5rem 0;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .post-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .post-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .post-content h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), #9b59b6);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        .post-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .post-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .post-content strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .post-content code {
+            background: var(--bg-secondary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        .post-content pre {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+        }
+
+        .post-content ul, .post-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+
+        .post-content blockquote {
+            border-left: 4px solid var(--accent);
+            margin: 2rem 0;
+            padding: 1rem 2rem;
+            background: rgba(243, 156, 18, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Blog Tiles */
+        .blog-tiles-container {
+            text-align: center;
+        }
+
+        .blog-tiles-container h2 {
+            color: var(--accent);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .blog-tiles-container h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #9b59b6);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .blog-tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-tile {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .blog-tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        [data-theme="light"] .blog-tile {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .blog-tile::before {
+            background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.15), transparent);
+        }
+
+        [data-theme="light"] .blog-tile:hover {
+            box-shadow: 0 20px 40px rgba(230, 126, 34, 0.15);
+        }
+
+        .blog-tile:hover::before {
+            left: 100%;
+        }
+
+        .blog-tile:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+            border-color: var(--accent);
+        }
+
+        .blog-tile-title {
+            color: var(--accent);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-tile-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .blog-tile-excerpt {
+            color: var(--text-primary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-tile-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .blog-tag {
+            background: var(--bg-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            font-weight: 500;
+        }
+
+        .blog-tile:hover .blog-tag {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 5rem 1rem 2rem;
+            }
+
+            .nav-content {
+                padding: 0 1rem;
+            }
+
+            .nav-brand h1 {
+                font-size: 1rem;
+            }
+
+            .nav-brand img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: 1px solid var(--border);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                z-index: 999;
+                display: none;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem 0;
+                font-size: 1.1rem;
+                border-bottom: 1px solid var(--border);
+                text-align: center;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                background: transparent;
+                border: none;
+                color: var(--text-primary);
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+
+            .blog-sidebar {
+                order: 2;
+                position: static;
+            }
+
+            .sidebar-content {
+                padding: 1.5rem;
+            }
+
+            .sidebar-content h4 {
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+            }
+
+            .post-link {
+                padding: 0.7rem 0.8rem;
+                font-size: 0.95rem;
+            }
+
+            .blog-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .post-title {
+                font-size: 2.2rem;
+                line-height: 1.1;
+                margin-bottom: 1rem;
+            }
+
+            .post-meta {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .post-content {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .post-content h1 {
+                font-size: 2rem;
+            }
+
+            .post-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .post-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .post-content p {
+                margin-bottom: 1.2rem;
+                text-align: left;
+            }
+
+            .post-content pre {
+                padding: 1rem;
+                margin: 1.5rem 0;
+                border-radius: 8px;
+                overflow-x: auto;
+            }
+
+            .post-content code {
+                font-size: 0.9rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .post-content ul, .post-content ol {
+                padding-left: 1.5rem;
+            }
+
+            .post-content blockquote {
+                padding: 0.8rem 1.5rem;
+                margin: 1.5rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-container {
+                padding: 4rem 0.8rem 1.5rem;
+                gap: 1rem;
+            }
+
+            .sidebar-content {
+                padding: 1.2rem;
+            }
+
+            .blog-tiles {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .blog-tile {
+                padding: 1.2rem;
+            }
+
+            .blog-tiles-container h2 {
+                font-size: 1.6rem;
+            }
+
+            .blog-tile-title {
+                font-size: 1.1rem;
+            }
+
+            .blog-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .post-title {
+                font-size: 1.8rem;
+            }
+
+            .post-meta {
+                font-size: 0.9rem;
+            }
+
+            .post-content {
+                font-size: 0.95rem;
+            }
+
+            .post-content h1 {
+                font-size: 1.7rem;
+            }
+
+            .post-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .post-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .post-content pre {
+                padding: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .post-content blockquote {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23f39c12'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30' font-weight='bold'%3EMT%3C/text%3E%3C/svg%3E" alt="Profile">
+                <h1>Madhusoodhan T.G.</h1>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html">Home</a>
+                <a href="./blog.html">Blog</a>
+                <a href="https://github.com/TGMadhusoodhan" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/madhusoodhan-girinarayanan/" target="_blank">LinkedIn</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+        </div>
+    </nav>
+
+    <div class="blog-container">
+        <aside class="blog-sidebar">
+            <div class="sidebar-content">
+                <h4>Blog Posts</h4>
+                <div id="post-list" class="post-list">
+                    <a href="./blog.html?p=hello-world" class="post-link">Hello World</a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="blog-content">
+            <div class="blog-post-header">
+                <h1 class="post-title" id="postTitle">Welcome to My Blog</h1>
+                <div class="post-meta" id="postMeta">Select a post to read</div>
+            </div>
+
+            <div class="post-content" id="postContent">
+                <div class="blog-tiles-container">
+                    <h2>Latest Blog Posts</h2>
+                    <div class="blog-tiles" id="blogTiles">
+                        <!-- Blog tiles will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        async function loadMarkdownPost(postName) {
+            try {
+                console.log(`Attempting to load: ${postName}.md`);
+                const response = await fetch(`./${postName}.md`);
+                console.log('Response status:', response.status);
+
+                if (!response.ok) throw new Error(`Post not found: ${postName} (Status: ${response.status})`);
+
+                const markdown = await response.text();
+                console.log('Markdown loaded:', markdown.substring(0, 100) + '...');
+
+                const html = marked.parse(markdown);
+
+                document.getElementById('postContent').innerHTML = html;
+
+                const firstHeading = markdown.match(/^#\s+(.+)$/m);
+                const title = firstHeading ? firstHeading[1] : postName.replace(/-/g, ' ');
+                document.getElementById('postTitle').textContent = title;
+                document.getElementById('postMeta').textContent = 'Posted recently';
+
+                document.querySelectorAll('.post-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.includes(`p=${postName}`)) {
+                        link.classList.add('active');
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error loading post:', error);
+                document.getElementById('postContent').innerHTML = `<p>Sorry, this post could not be loaded.</p><p>Error: ${error.message}</p><p>Tried to load: ${postName}.md</p>`;
+                document.getElementById('postTitle').textContent = 'Post Not Found';
+            }
+        }
+
+        // Load blog tiles on page load
+        function loadBlogTiles() {
+            const blogTilesContainer = document.getElementById('blogTiles');
+
+            // For now, create tiles for available posts
+            const availablePosts = [
+                {
+                    title: 'Hello World',
+                    slug: 'hello-world',
+                    excerpt: 'Welcome to my blog! This is my first post where I introduce myself and share my journey.',
+                    date: 'January 15, 2024',
+                    tags: ['Introduction', 'Personal', 'Journey']
+                }
+                // Add more posts here as you create them
+            ];
+
+            if (availablePosts.length === 0) {
+                blogTilesContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No blog posts available yet.</p>';
+                return;
+            }
+
+            blogTilesContainer.innerHTML = availablePosts.map(post => `
+                <div class="blog-tile" onclick="loadPostFromTile('${post.slug}')">
+                    <h3 class="blog-tile-title">${post.title}</h3>
+                    <div class="blog-tile-meta">${post.date}</div>
+                    <p class="blog-tile-excerpt">${post.excerpt}</p>
+                    <div class="blog-tile-tags">
+                        ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadPostFromTile(slug) {
+            history.pushState(null, '', `?p=${slug}`);
+            loadMarkdownPost(slug);
+
+            // Hide tiles and show post content
+            document.querySelector('.blog-tiles-container').style.display = 'none';
+            document.querySelector('.blog-post-header').style.display = 'block';
+        }
+
+        function showBlogTiles() {
+            document.querySelector('.blog-tiles-container').style.display = 'block';
+            document.querySelector('.blog-post-header').style.display = 'none';
+            document.getElementById('postContent').innerHTML = `
+                <div class="blog-tiles-container">
+                    <h2>Latest Blog Posts</h2>
+                    <div class="blog-tiles" id="blogTiles"></div>
+                </div>
+            `;
+            loadBlogTiles();
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const postParam = urlParams.get('p');
+
+        if (postParam) {
+            loadMarkdownPost(postParam);
+            document.querySelector('.blog-tiles-container').style.display = 'none';
+        } else {
+            loadBlogTiles();
+            document.querySelector('.blog-post-header').style.display = 'none';
+        }
+
+        document.querySelectorAll('.post-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = new URL(link.href);
+                const postName = url.searchParams.get('p');
+                if (postName) {
+                    history.pushState(null, '', `?p=${postName}`);
+                    loadMarkdownPost(postName);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

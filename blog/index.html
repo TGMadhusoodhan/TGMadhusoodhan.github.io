@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to Blog...</title>
+</head>
+<body>
+    <script>
+        // Redirect to blog.html with any URL parameters
+        const currentParams = window.location.search;
+        window.location.href = './blog.html' + currentParams;
+    </script>
+    <p>Redirecting to blog...</p>
+</body>
+</html>
