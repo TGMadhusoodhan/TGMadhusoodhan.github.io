@@ -899,7 +899,7 @@
             <div class="sidebar-content">
                 <h4>Blog Posts</h4>
                 <div id="post-list" class="post-list">
-                    <a href="./blog.html?p=hello-world" class="post-link">Hello World</a>
+                    <!-- Posts will be loaded dynamically from posts.json -->
                 </div>
             </div>
         </aside>
@@ -985,43 +985,75 @@
             }
         }
 
+        // Load posts from posts.json
+        let allPosts = [];
+
+        async function loadPostsData() {
+            try {
+                const response = await fetch('./posts.json');
+                const data = await response.json();
+                allPosts = data.posts;
+                return allPosts;
+            } catch (error) {
+                console.error('Error loading posts.json:', error);
+                return [];
+            }
+        }
+
         // Load blog tiles on page load
-        function loadBlogTiles() {
+        async function loadBlogTiles() {
             const blogTilesContainer = document.getElementById('blogTiles');
 
-            // For now, create tiles for available posts
-            const availablePosts = [
-                {
-                    title: 'Hello World',
-                    slug: 'hello-world',
-                    excerpt: 'Welcome to my blog! This is my first post where I introduce myself and share my journey.',
-                    date: 'January 15, 2024',
-                    tags: ['Introduction', 'Personal', 'Journey']
-                },
-                {
-                  title: 'AI- RAN',
-                  slug: 'ai-ran',
-                  excerpt: 'Exploring the capabilities of AI in RAN.',
-                  date: 'September 29, 2025',
-                  tags: ['Technology','AI', '5G', 'RAN']
-                }
-            ];
+            if (allPosts.length === 0) {
+                await loadPostsData();
+            }
 
-            if (availablePosts.length === 0) {
+            if (allPosts.length === 0) {
                 blogTilesContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">No blog posts available yet.</p>';
                 return;
             }
 
-            blogTilesContainer.innerHTML = availablePosts.map(post => `
+            blogTilesContainer.innerHTML = allPosts.map(post => `
                 <div class="blog-tile" onclick="loadPostFromTile('${post.slug}')">
                     <h3 class="blog-tile-title">${post.title}</h3>
                     <div class="blog-tile-meta">${post.date}</div>
                     <p class="blog-tile-excerpt">${post.excerpt}</p>
                     <div class="blog-tile-tags">
-                        ${post.tags.map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                        ${post.category ? `<span class="blog-tag">${post.category}</span>` : ''}
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Load sidebar post list
+        async function loadSidebarPosts() {
+            const postListContainer = document.getElementById('post-list');
+
+            if (allPosts.length === 0) {
+                await loadPostsData();
+            }
+
+            if (allPosts.length === 0) {
+                postListContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">No posts yet</p>';
+                return;
+            }
+
+            postListContainer.innerHTML = allPosts.map(post => `
+                <a href="./blog.html?p=${post.slug}" class="post-link">${post.title}</a>
+            `).join('');
+
+            // Re-attach event listeners to newly created links
+            document.querySelectorAll('.post-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const url = new URL(link.href);
+                    const postName = url.searchParams.get('p');
+                    if (postName) {
+                        history.pushState(null, '', `?p=${postName}`);
+                        loadMarkdownPost(postName);
+                    }
+                });
+            });
         }
 
         function loadPostFromTile(slug) {
@@ -1045,28 +1077,25 @@
             loadBlogTiles();
         }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const postParam = urlParams.get('p');
+        // Initialize the blog page
+        async function initBlog() {
+            await loadPostsData();
+            await loadSidebarPosts();
 
-        if (postParam) {
-            loadMarkdownPost(postParam);
-            document.querySelector('.blog-tiles-container').style.display = 'none';
-        } else {
-            loadBlogTiles();
-            document.querySelector('.blog-post-header').style.display = 'none';
+            const urlParams = new URLSearchParams(window.location.search);
+            const postParam = urlParams.get('p');
+
+            if (postParam) {
+                loadMarkdownPost(postParam);
+                document.querySelector('.blog-tiles-container').style.display = 'none';
+            } else {
+                loadBlogTiles();
+                document.querySelector('.blog-post-header').style.display = 'none';
+            }
         }
 
-        document.querySelectorAll('.post-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const url = new URL(link.href);
-                const postName = url.searchParams.get('p');
-                if (postName) {
-                    history.pushState(null, '', `?p=${postName}`);
-                    loadMarkdownPost(postName);
-                }
-            });
-        });
+        // Start the blog
+        initBlog();
     </script>
 </body>
 </html>
