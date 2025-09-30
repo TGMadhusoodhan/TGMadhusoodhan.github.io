@@ -1,3 +1,3 @@
 # Hello World
-## THis is my new blog
-Hell this is my new test blog
+## This is my new blog
+Hello! this is my new test blog :)
