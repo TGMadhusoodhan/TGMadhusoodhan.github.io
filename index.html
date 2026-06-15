@@ -1154,7 +1154,7 @@
                     }
 
                     blogPostsEl.innerHTML = recentPosts.map(post => `
-                        <a href="./blog/blog.html?p=${encodeURIComponent(post.slug)}" class="blog-post">
+                        <a href="${post.url ? './blog/' + post.url : './blog/blog.html?p=' + encodeURIComponent(post.slug)}" class="blog-post">
                             <h4>${post.title}</h4>
                             <div class="date">${new Date(post.date).toLocaleDateString('en-US', {
                                 year: 'numeric',
