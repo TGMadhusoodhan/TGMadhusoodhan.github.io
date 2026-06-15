@@ -952,6 +952,12 @@
         });
 
         async function loadMarkdownPost(postName) {
+            // If this post has a direct URL, navigate there
+            const htmlPost = allPosts.find(p => p.slug === postName);
+            if (htmlPost && htmlPost.url) {
+                window.location.href = htmlPost.url;
+                return;
+            }
             try {
                 console.log(`Attempting to load: ${postName}.md`);
                 const response = await fetch(`./${postName}.md`);
@@ -1039,7 +1045,7 @@
             }
 
             postListContainer.innerHTML = allPosts.map(post => `
-                <a href="./blog.html?p=${post.slug}" class="post-link">${post.title}</a>
+                <a href="${post.url || './blog.html?p=' + post.slug}" class="post-link">${post.title}</a>
             `).join('');
 
             // Re-attach event listeners to newly created links
@@ -1057,6 +1063,11 @@
         }
 
         function loadPostFromTile(slug) {
+            const htmlPost = allPosts.find(p => p.slug === slug);
+            if (htmlPost && htmlPost.url) {
+                window.location.href = htmlPost.url;
+                return;
+            }
             history.pushState(null, '', `?p=${slug}`);
             loadMarkdownPost(slug);
 
