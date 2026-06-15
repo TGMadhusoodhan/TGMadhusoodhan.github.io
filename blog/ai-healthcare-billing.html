@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two AI Systems Are Fighting Over Your Hospital Bill | Madhusoodhan TG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.30.0/tabler-icons.min.css">
+<style>
+:root {
+  --bg: #0a0b0f; --bg2: #12141b; --bg3: #1a1d29;
+  --tp: #ffffff; --ts: #94a3b8; --tt: #64748b;
+  --ac: #f39c12; --acd: rgba(243,156,18,0.1);
+  --bor: #2a2e3f;
+  --gr: #2ecc71; --grd: rgba(46,204,113,0.08);
+  --re: #e74c3c; --red: rgba(231,76,60,0.08);
+}
+[data-theme="light"] {
+  --bg: #fafbfc; --bg2: #ffffff; --bg3: #f1f3f5;
+  --tp: #2d3748; --ts: #4a5568; --tt: #718096;
+  --ac: #e67e22; --acd: rgba(230,126,34,0.08);
+  --bor: #e2e8f0;
+  --gr: #059669; --grd: rgba(5,150,105,0.06);
+  --re: #dc2626; --red: rgba(220,38,38,0.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--tp);line-height:1.7;transition:background 0.3s,color 0.3s}
+.nav{position:fixed;top:0;left:0;right:0;background:var(--bg2);backdrop-filter:blur(10px);border-bottom:1px solid var(--bor);z-index:1000;padding:1rem 0}
+.nav-in{max-width:860px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+.back{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--ts);font-size:.9rem;font-weight:500;transition:color .2s}
+.back:hover{color:var(--ac)}
+.nav-label{font-size:.85rem;font-weight:600;color:var(--ac);letter-spacing:.05em}
+.tog{background:var(--bg3);border:1px solid var(--bor);color:var(--tp);padding:.4rem .7rem;border-radius:8px;cursor:pointer;font-size:1rem;transition:all .3s}
+.tog:hover{background:var(--ac);color:#000}
+.wrap{max-width:800px;margin:0 auto;padding:88px 24px 80px}
+.tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:16px}
+.blog-title{font-size:2.1rem;line-height:1.2;font-weight:700;color:var(--tp);margin-bottom:14px}
+.sub{font-size:1.05rem;color:var(--ts);line-height:1.6;margin-bottom:24px}
+.meta{display:flex;align-items:center;gap:14px;padding-bottom:28px;border-bottom:1px solid var(--bor);margin-bottom:44px;flex-wrap:wrap}
+.mn{font-size:14px;font-weight:600;color:var(--tp)}
+.md{font-size:13px;color:var(--tt)}
+.prose p{font-size:1.05rem;line-height:1.85;color:var(--ts);margin-bottom:22px}
+.prose h2{font-size:1.4rem;font-weight:700;color:var(--ac);margin-top:52px;margin-bottom:18px;line-height:1.3}
+.prose h2::before{content:'';display:block;width:32px;height:3px;background:linear-gradient(90deg,var(--ac),#9b59b6);margin-bottom:14px;border-radius:2px}
+.prose ul,.prose ol{margin:0 0 22px 24px}
+.prose li{font-size:1.05rem;line-height:1.75;color:var(--ts);margin-bottom:8px}
+.prose strong{font-weight:700;color:var(--tp)}
+.prose blockquote{border-left:3px solid var(--ac);margin:36px 0;padding:16px 24px;background:var(--acd);border-radius:0 8px 8px 0}
+.prose blockquote p{margin:0;font-size:1rem;color:var(--ac)}
+.callout{background:var(--acd);border:1px solid rgba(243,156,18,.2);border-radius:12px;padding:18px 22px;margin:32px 0}
+.callout p{margin:0!important;font-size:1rem!important;color:var(--ac)!important}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0}
+.stat{background:var(--bg3);border:1px solid var(--bor);border-radius:12px;padding:20px;text-align:center}
+.stat-n{font-size:2rem;font-weight:700;color:var(--ac);font-family:monospace;line-height:1.1;margin-bottom:6px}
+.stat-l{font-size:12px;color:var(--tt);line-height:1.4}
+.diag-wrap{background:var(--bg3);border:1px solid var(--bor);border-radius:16px;padding:28px;margin:36px 0;position:relative}
+.diag-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ac),#9b59b6,var(--ac));border-radius:16px 16px 0 0;animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:.7}50%{opacity:1}}
+.diag-label{text-align:center;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tt);margin-bottom:20px;margin-top:4px}
+.dw{display:flex;flex-direction:column;gap:0;width:100%}
+.dw *{box-sizing:border-box}
+.ly{border:1px solid var(--bor);border-radius:12px;padding:16px;background:var(--bg2)}
+.lhdr{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.bd{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.lt{font-size:11px;font-weight:600;color:var(--ts)}
+.lt2{margin-left:auto;font-size:10px;color:var(--tt);font-family:monospace}
+.conn{display:flex;flex-direction:column;align-items:center;padding:4px 0}
+.cL{width:1px;height:20px;background:var(--bor)}
+.cA{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--bor)}
+.cAg{border-top-color:rgba(46,204,113,.5)} .cLg{background:rgba(46,204,113,.5)}
+.sg{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.sc{border:1px solid var(--bor);border-radius:8px;padding:12px 6px;text-align:center;background:var(--bg)}
+.sc-n{font-size:11px;font-weight:600;color:var(--tp);line-height:1.3;margin-bottom:2px;margin-top:6px}
+.sc-s{font-size:10px;color:var(--tt);line-height:1.3}
+.eg{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+.mc{border:1px solid var(--bor);border-radius:8px;padding:14px;background:var(--bg)}
+.mc-t{font-size:12px;font-weight:600;color:var(--tp);margin-bottom:5px}
+.mc-b{font-size:11px;color:var(--ts);line-height:1.5}
+.qp{display:inline-block;font-size:10px;font-weight:600;color:var(--ac);background:var(--acd);border-radius:20px;padding:2px 8px;margin-top:8px;font-family:monospace}
+.vg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.vc{border:1px solid var(--bor);border-radius:8px;padding:14px;background:var(--bg)}
+.vcp{border-color:rgba(243,156,18,.3);background:var(--acd)}
+.vct{font-size:11px;font-weight:600;color:var(--tp);margin-bottom:8px}
+.vi{font-size:10px;color:var(--tt);font-family:monospace;padding:2px 0}
+.de{border:1px solid var(--bor);border-radius:12px;overflow:hidden}
+.deh{background:var(--bg3);border-bottom:1px solid var(--bor);padding:10px 16px;display:flex;align-items:center;gap:8px}
+.deb{display:grid;grid-template-columns:1fr 48px 1fr}
+.des{padding:16px}
+.des.re{background:var(--grd);border-right:1px solid var(--bor)}
+.des.co{background:var(--acd);border-left:1px solid var(--bor)}
+.dec{display:flex;align-items:center;justify-content:center;background:var(--bg3)}
+.devs{font-size:20px;font-weight:600;color:var(--tt);font-family:monospace}
+.dl{font-size:10px;font-weight:600;letter-spacing:.04em;margin-bottom:8px}
+.di{list-style:none;display:flex;flex-direction:column;gap:5px}
+.di li{font-size:11px;color:var(--ts);display:flex;align-items:center;gap:7px}
+.dd{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.pg{display:grid;grid-template-columns:1fr 1.8fr;gap:8px}
+.af{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--red);border-radius:8px;margin-bottom:6px;font-size:11px;color:var(--re)}
+.af:last-of-type{margin-bottom:0}
+.afd{width:6px;height:6px;border-radius:50%;background:var(--re);flex-shrink:0}
+.oc{border:1px solid var(--bor);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px;background:var(--bg);margin-bottom:6px}
+.oc:last-child{margin-bottom:0}
+.oc-t{font-size:11px;font-weight:600;color:var(--tp)}
+.oc-s{font-size:10px;color:var(--tt);margin-top:1px}
+.fkg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fkc{border:1px solid var(--bor);border-radius:8px;padding:14px;text-align:center;background:var(--bg)}
+.fkh{border-color:rgba(46,204,113,.3);background:var(--grd)}
+.fkl{border-color:rgba(243,156,18,.3);background:var(--acd)}
+.fkt{font-size:10px;font-weight:600;letter-spacing:.04em;margin-bottom:4px}
+.fka{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:3px}
+.fkd{font-size:10px;color:var(--tt)}
+.agg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.agc{border:1px solid var(--bor);border-radius:8px;padding:12px;text-align:center}
+.agy{border-color:rgba(46,204,113,.3);background:var(--grd)}
+.agn{border-color:rgba(231,76,60,.3);background:var(--red)}
+.agcl{font-size:10px;font-weight:600;letter-spacing:.04em;margin-bottom:4px}
+.agca{font-size:12px;font-weight:600}
+.dpf{display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+.dps{background:var(--red);border:1px solid rgba(231,76,60,.3);border-radius:8px;padding:6px 10px;font-size:11px;color:var(--re)}
+.dpa{font-size:12px;color:var(--tt)}
+.llg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.llc{border:1px solid rgba(46,204,113,.3);border-radius:8px;padding:12px;background:var(--grd)}
+.llct{font-size:11px;font-weight:600;color:var(--gr);margin-bottom:3px}
+.llcs{font-size:10px;color:var(--tt)}
+.fb{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px dashed rgba(46,204,113,.3);border-radius:8px;margin-top:10px;font-size:12px;color:var(--gr);background:var(--grd)}
+.mhdr{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.mhd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mhl{font-size:11px;font-weight:600}
+.mhn{margin-left:auto;font-size:10px;color:var(--tt);font-family:monospace}
+.sources{margin-top:60px;padding-top:24px;border-top:1px solid var(--bor)}
+.src-t{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tt);margin-bottom:10px}
+.sources p{font-size:13px!important;color:var(--tt)!important;line-height:1.5!important;margin-bottom:4px!important}
+.blog-footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--bor);text-align:center}
+.blog-footer a{color:var(--ac);text-decoration:none;font-size:.9rem;font-weight:500}
+.blog-footer a:hover{text-decoration:underline}
+@media(max-width:640px){
+  .sg{grid-template-columns:repeat(3,1fr)}
+  .pg{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .blog-title{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a href="/" class="back"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to portfolio</a>
+    <span class="nav-label">Blog</span>
+    <button class="tog" onclick="toggleTheme()" aria-label="Toggle theme"><i class="ti ti-sun" id="ticon" aria-hidden="true"></i></button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="tag">Healthcare AI &#183; Thought Leadership</div>
+  <h1 class="blog-title">Two AI Systems Are Fighting Over Your Hospital Bill. Neither One Is on Your Side.</h1>
+  <p class="sub">How a $140 billion administrative arms race became the most consequential use of AI in American healthcare, and what a different model might look like.</p>
+  <div class="meta">
+    <span class="mn">Madhusoodhan T.G.</span>
+    <span class="md">&#183;</span>
+    <span class="md">ML Engineer, AI/Healthcare Systems</span>
+    <span class="md">&#183;</span>
+    <span class="md">June 2025</span>
+  </div>
+
+  <div class="prose">
+    <h2>The story starts in a car</h2>
+    <p>A woman gives birth in a car, running red lights through Orlando at midnight.</p>
+    <p>Her son survives 56 days in the NICU. Real care. Real machines keeping a real baby alive.</p>
+    <p>Then the bill arrives. $550,000. With a payment plan of $45,843 a month.</p>
+    <p>She did not create that number. Two AI systems fighting over her son&#39;s chart created it.</p>
+    <p>The bill was eventually corrected. A journalist started asking questions, actual people reviewed the numbers, and the family was saved close to half a million dollars. But that is not the comforting part of the story. That is the damning part. A system should not require a reporter to function correctly. For every Bisi Bennett whose case reaches a journalist, there are thousands of families who quietly pay, or quietly stop fighting, or simply disengage from a healthcare system they no longer trust.</p>
+    <p>This story, reported in STAT News by the chief medical officer of Machinify, is almost less about the numbers and more about what produced them.</p>
+
+    <h2>What is actually happening</h2>
+    <p>Most people assume hospital bills are expensive because healthcare is expensive. That is partly true. But there is another reason, one that has almost nothing to do with the care itself.</p>
+    <p>The US hospital payment system works like this: when you are discharged, the hospital does not hand you an itemized receipt. It translates everything that happened to you into codes. ICD-10 codes. Each diagnosis, each procedure, each complication: it is all a code. And each code pays a different amount.</p>
+    <p>&#8220;Sepsis&#8221; pays more than &#8220;infection.&#8221; &#8220;Severe sepsis&#8221; pays more than regular sepsis. &#8220;Septic shock&#8221; pays even more. The clinical difference between these is real. The coding difference is where things get interesting.</p>
+    <p>Hospitals have entire departments (called revenue cycle management) whose only job is to look at your chart and find the highest-paying code that can technically be justified. This is legal. Every hospital does it.</p>
+    <p>The mechanism has grown more specific. Hospitals now deploy what is called ambient listening AI: software that records every physician-patient conversation and automatically populates the electronic health record with secondary diagnoses. The physician may never review what was added. The AI hears a clinical conversation, identifies conditions that justify higher billing codes, and inserts them into the chart. No human deliberately writes anything false. The inflation happens automatically, in the background, at scale.</p>
+    <p>Insurance companies receive these bills and push back. They have their own teams reviewing claims, denying them, requesting more documentation, and delaying payment. Also legal. Also universal.</p>
+    <p>This back-and-forth fight happens on every single claim, across thousands of hospitals and millions of patients. And it costs <strong>$140 billion a year</strong>. Not in care. Just in the arguing.</p>
+
+    <h2>Wait, aren&#39;t insurance companies the good guys here?</h2>
+    <p>This is the most interesting question. And the honest answer is: neither side is the villain. Both sides are rational actors in a broken system.</p>
+    <p>The insurer pushing back on a sepsis code? Sometimes they are right. Sometimes the hospital inflated a code and the insurer correctly rejected it. In that moment, the insurer&#39;s financial interest happened to align with the right outcome.</p>
+    <p>But the insurer&#39;s AI is not asking &#8220;is this claim legitimate?&#8221; It is asking &#8220;can we pay less?&#8221; Those are not the same question. It pushes back on everything, legitimate and illegitimate claims alike, because statistically, a percentage of hospitals will just accept less rather than fight.</p>
+    <div class="callout"><p>The real problem: nobody in this system has the patient&#39;s interest as their objective function. The hospital&#39;s AI is not asking &#8220;what is fair for this patient?&#8221; The insurer&#39;s AI is not asking it either. Their chart is the battlefield. Their bill is the outcome.</p></div>
+
+    <h2>The data tells the real story</h2>
+    <p>If you want proof that this is a coding problem and not a clinical one, look at the numbers.</p>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">3x</div><div class="stat-l">Sepsis diagnoses in Massachusetts since 2010, with no change in patient severity</div></div>
+      <div class="stat"><div class="stat-n">$140B</div><div class="stat-l">Annual cost of the billing war. Not care. Just the arguing.</div></div>
+      <div class="stat"><div class="stat-n">11.8%</div><div class="stat-l">Initial claim denial rate in 2024, up from 10.2% a few years prior</div></div>
+    </div>
+    <p>At some hospitals, maternal hemorrhage diagnoses jumped from 4% to 12% of maternity admissions, with no matching rise in blood transfusions. The government&#39;s own auditors flagged a single Medicare diagnosis in 2019 that generated $7.4 billion across 581,000 patients, and diplomatically noted the length of stay &#8220;didn&#39;t quite match the severity of the diagnoses.&#8221;</p>
+    <p>Nobody is getting sicker or healthier. The bots are just getting better at arguing.</p>
+
+    <h2>This is a game theory problem</h2>
+    <p>Strip away the medical complexity and what you have is an adversarial game between two players with misaligned incentives.</p>
+    <ul>
+      <li><strong>Hospital:</strong> &#8220;How do we maximize what we get paid?&#8221;</li>
+      <li><strong>Insurer:</strong> &#8220;How do we minimize what we pay out?&#8221;</li>
+      <li><strong>Patient:</strong> standing in the middle holding a $550,000 bill.</li>
+    </ul>
+    <p>Both sides built AI to play their respective games more efficiently. More sophisticated AI means a more expensive war. The $140 billion is not waste in the careless sense. It is the cost of running two opposed war machines on the same patient record.</p>
+    <p>And here is the twist: the insurer is currently winning. Medicare Advantage denials jumped 55.7% between 2022 and 2023 alone. Only 14% of hospitals have deployed AI to fight back. As one industry expert put it, the volume has created a situation that is &#8220;not a human-addressable problem anymore at this scale.&#8221;</p>
+    <p>This arms race ends one of three ways: mutual disarmament, one side winning, or the game changing entirely.</p>
+
+    <h2>What a better system looks like</h2>
+    <p>Companies like Machinify are thinking about the third option: changing the game.</p>
+    <p>The current flow is: patient discharged, hospital inflates codes, bill sent to insurer, insurer AI pushes back, both sides fight for months, patient gets a terrifying bill.</p>
+    <p>The proposed alternative is one neutral AI that adjudicates the claim at the moment of discharge, grounded in clinical reality rather than coded claims. The insight is deceptively simple: clinical facts are harder to game than codes. Ambient listening AI can auto-populate a chart with diagnoses, but it cannot fabricate that blood cultures were ordered or that vasopressors were dispensed. Objective records are the immune system of the whole design.</p>
+
+    <h2>My imagined architecture for this neutral system</h2>
+    <p>The key design decision is what I would call the <strong>query source</strong>: rather than starting with submitted codes and working backward, you start with extracted clinical facts and work forward. Everything else flows from that single choice. Here is what that system looks like in my head.</p>
+  </div>
+
+  <div class="diag-wrap">
+    <div class="diag-label">My imagined architecture for neutral claim adjudication</div>
+    <div class="dw">
+
+      <div class="ly">
+        <div class="lhdr">
+          <span class="bd" style="background:var(--acd);color:var(--ac)">Layer 01</span>
+          <span class="lt">Ingestion</span>
+          <span class="lt2">Machinify SaaS, untouchable by either side</span>
+        </div>
+        <div class="sg">
+          <div class="sc"><i class="ti ti-file-text" aria-hidden="true" style="font-size:18px;color:var(--ac);display:block"></i><div class="sc-n">Clinical notes</div><div class="sc-s">Doctor and nurse narratives</div></div>
+          <div class="sc"><i class="ti ti-test-pipe" aria-hidden="true" style="font-size:18px;color:var(--ac);display:block"></i><div class="sc-n">Lab results</div><div class="sc-s">Blood cultures, CBC, lactate</div></div>
+          <div class="sc"><i class="ti ti-activity" aria-hidden="true" style="font-size:18px;color:var(--ac);display:block"></i><div class="sc-n">Vitals</div><div class="sc-s">HR, BP, SpO2 trajectory</div></div>
+          <div class="sc"><i class="ti ti-pill" aria-hidden="true" style="font-size:18px;color:var(--ac);display:block"></i><div class="sc-n">Medication logs</div><div class="sc-s">Drug, dose, duration</div></div>
+          <div class="sc"><i class="ti ti-cut" aria-hidden="true" style="font-size:18px;color:var(--ac);display:block"></i><div class="sc-n">Surgery logs</div><div class="sc-s">OR time, procedures</div></div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="ly">
+        <div class="lhdr">
+          <span class="bd" style="background:var(--grd);color:var(--gr)">Layer 02</span>
+          <span class="lt">Extraction</span>
+        </div>
+        <div class="eg">
+          <div class="mc"><div class="mc-t"><i class="ti ti-cpu" aria-hidden="true" style="margin-right:5px"></i>Clinical NLP engine</div><div class="mc-b">ClinicalBERT fine-tuned on medical narratives. Named entity recognition, relation extraction, temporal sequencing.</div></div>
+          <div style="display:flex;align-items:center;justify-content:center"><i class="ti ti-arrow-right" aria-hidden="true" style="font-size:22px;color:var(--tt)"></i></div>
+          <div class="mc" style="border-color:rgba(243,156,18,.3);background:var(--acd)"><div class="mc-t" style="color:var(--ac)"><i class="ti ti-database" aria-hidden="true" style="margin-right:5px"></i>Structured clinical facts</div><div class="mc-b">What drugs were given. What procedures happened. What vitals showed. Objective, not coded.</div><span class="qp"><i class="ti ti-star" aria-hidden="true" style="margin-right:3px;font-size:9px"></i>query source</span></div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="ly">
+        <div class="lhdr">
+          <span class="bd" style="background:rgba(155,89,182,.15);color:#c39bd3">Layer 03</span>
+          <span class="lt">Vector store, three interconnected embedding spaces</span>
+        </div>
+        <div class="vg">
+          <div class="vc"><div class="vct">Space 1 &#183; Raw note embeddings</div><div class="vi">&#8594; Full narrative context</div><div class="vi">&#8594; Semantic similarity search</div><div class="vi">&#8594; Historical case retrieval</div></div>
+          <div class="vc vcp">
+            <div style="font-size:10px;font-weight:600;color:var(--ac);margin-bottom:5px;font-family:monospace"><i class="ti ti-bolt" aria-hidden="true" style="margin-right:3px"></i>query trigger</div>
+            <div class="vct" style="color:var(--ac)">Space 2 &#183; Clinical fact embeddings</div>
+            <div class="vi" style="color:var(--ts)">&#8594; Extracted objective facts</div><div class="vi" style="color:var(--ts)">&#8594; Severity score vectors</div><div class="vi" style="color:var(--ts)">&#8594; Procedure fingerprints</div>
+            <div style="display:flex;justify-content:center;align-items:center;gap:6px;margin-top:8px;font-size:10px;color:var(--tt)"><span style="color:var(--ac);font-size:13px">&#8592;</span>graph relationships<span style="color:var(--ac);font-size:13px">&#8594;</span></div>
+          </div>
+          <div class="vc"><div class="vct">Space 3 &#183; ICD code embeddings</div><div class="vi">&#8594; Code semantic clusters</div><div class="vi">&#8594; Ontology relationships</div><div class="vi">&#8594; Billing pattern history</div></div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="de">
+        <div class="deh">
+          <span class="bd" style="background:var(--bg3);color:var(--ts);border:1px solid var(--bor)">Core</span>
+          <span style="font-size:12px;font-weight:600;color:var(--tp)">Diff engine</span>
+          <span class="lt2">Heartbeat of the system</span>
+        </div>
+        <div class="deb">
+          <div class="des re">
+            <div class="dl" style="color:var(--gr)">Clinical reality</div>
+            <div style="font-size:11px;color:var(--tt);margin-bottom:10px">What objective evidence shows</div>
+            <ul class="di">
+              <li><span class="dd" style="background:var(--gr)"></span>Blood cultures ordered</li>
+              <li><span class="dd" style="background:var(--gr)"></span>Vasopressors administered</li>
+              <li><span class="dd" style="background:var(--gr)"></span>ICU hours logged</li>
+              <li><span class="dd" style="background:var(--gr)"></span>Antibiotic escalation confirmed</li>
+            </ul>
+          </div>
+          <div class="dec"><div class="devs">&#8800;</div></div>
+          <div class="des co">
+            <div class="dl" style="color:var(--ac)">Coded claims</div>
+            <div style="font-size:11px;color:var(--tt);margin-bottom:10px">What hospital billing says</div>
+            <ul class="di">
+              <li><span class="dd" style="background:var(--ac)"></span>Sepsis (ICD A41.9)</li>
+              <li><span class="dd" style="background:var(--ac)"></span>Severe sepsis (ICD R65.20)</li>
+              <li><span class="dd" style="background:var(--ac)"></span>Septic shock (ICD R65.21)</li>
+              <li><span class="dd" style="background:var(--ac)"></span>MCC complications added</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="pg">
+        <div class="ly" style="padding:14px">
+          <div class="mhdr"><div class="mhd" style="background:var(--re)"></div><span class="mhl" style="color:var(--re)">Anomaly detection</span></div>
+          <div class="af"><div class="afd"></div>Note vs objective data mismatch</div>
+          <div class="af"><div class="afd"></div>Code vs clinical reality gap</div>
+          <div class="af"><div class="afd"></div>Population-level outlier</div>
+          <div style="margin-top:10px;font-size:10px;color:var(--tt);font-family:monospace">Autoencoder &#183; high reconstruction error = anomaly</div>
+        </div>
+        <div class="ly" style="padding:14px">
+          <div class="mhdr"><div class="mhd" style="background:var(--ac)"></div><span class="mhl" style="color:var(--ac)">Output layer</span></div>
+          <div class="oc"><i class="ti ti-coin" aria-hidden="true" style="font-size:18px;color:var(--gr);flex-shrink:0"></i><div><div class="oc-t">Single fair dollar amount</div><div class="oc-s">Bottom-up cost from actual resource consumption</div></div></div>
+          <div class="oc"><i class="ti ti-check" aria-hidden="true" style="font-size:18px;color:var(--ac);flex-shrink:0"></i><div><div class="oc-t">Code-by-code accept / reject</div><div class="oc-s">Each ICD code justified or disputed with evidence</div></div></div>
+          <div class="oc"><i class="ti ti-chart-bar" aria-hidden="true" style="font-size:18px;color:#9b59b6;flex-shrink:0"></i><div><div class="oc-t">Confidence score and justification</div><div class="oc-s">Full reasoning trace on every decision</div></div></div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="ly">
+        <div class="lhdr"><span class="bd" style="background:var(--bg3);color:var(--ts);border:1px solid var(--bor)">Decision</span><span class="lt">Confidence gate</span></div>
+        <div class="fkg">
+          <div class="fkc fkh"><div class="fkt" style="color:var(--gr)">High confidence</div><div class="fka"><i class="ti ti-check" aria-hidden="true"></i> Auto adjudicated</div><div class="fkd">No human needed. Decision final. Logged for monitoring.</div></div>
+          <div class="fkc fkl"><div class="fkt" style="color:var(--ac)">Low confidence / edge case</div><div class="fka"><i class="ti ti-arrow-right" aria-hidden="true"></i> Machinify reviewer</div><div class="fkd">Neutral clinical expert. Neither hospital nor insurer.</div></div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="ly" style="border-color:rgba(243,156,18,.3)">
+        <div class="mhdr"><div class="mhd" style="background:var(--ac)"></div><span class="mhl" style="color:var(--ac)">Machinify clinical reviewer</span><span class="mhn">Independent, full audit trail</span></div>
+        <div style="font-size:12px;color:var(--ts)">Neither side can influence the review. Companies like Machinify own the reviewer relationship completely.</div>
+        <div class="agg">
+          <div class="agc agy"><div class="agcl" style="color:var(--gr)">Reviewers agree</div><div class="agca" style="color:var(--gr)"><i class="ti ti-arrow-down" aria-hidden="true"></i> Training signal</div><div style="font-size:10px;color:var(--tt);margin-top:3px">Feeds learning layer directly</div></div>
+          <div class="agc agn"><div class="agcl" style="color:var(--re)">Reviewers disagree</div><div class="agca" style="color:var(--re)"><i class="ti ti-arrow-right" aria-hidden="true"></i> Dispute pipeline</div><div style="font-size:10px;color:var(--tt);margin-top:3px">Quarantined from training</div></div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL"></div><div class="cA"></div></div>
+
+      <div class="ly" style="border-color:rgba(231,76,60,.3)">
+        <div class="mhdr"><div class="mhd" style="background:var(--re)"></div><span class="mhl" style="color:var(--re)">Reviewer dispute pipeline</span><span class="mhn">Quarantined until resolved</span></div>
+        <div class="dpf">
+          <div class="dps"><i class="ti ti-lock" aria-hidden="true"></i> Case quarantined</div>
+          <div class="dpa">&#8594;</div>
+          <div class="dps"><i class="ti ti-user" aria-hidden="true"></i> Senior reviewer assigned</div>
+          <div class="dpa">&#8594;</div>
+          <div class="dps"><i class="ti ti-scale" aria-hidden="true"></i> Binding decision</div>
+          <div class="dpa">&#8594;</div>
+          <div class="dps"><i class="ti ti-check" aria-hidden="true"></i> Released as training signal</div>
+        </div>
+      </div>
+
+      <div class="conn" aria-hidden="true"><div class="cL cLg"></div><div class="cA cAg"></div></div>
+
+      <div class="ly" style="border-color:rgba(46,204,113,.3)">
+        <div class="mhdr"><div class="mhd" style="background:var(--gr)"></div><span class="mhl" style="color:var(--gr)">Learning layer</span><span class="mhn">Human-reviewed and resolved decisions only</span></div>
+        <div class="llg">
+          <div class="llc"><div class="llct">Space 1 updates</div><div class="llcs">Raw note embeddings sharpen over time</div></div>
+          <div class="llc"><div class="llct">Space 2 updates</div><div class="llcs">Clinical fact boundaries more precise</div></div>
+          <div class="llc"><div class="llct">Space 3 updates</div><div class="llcs">Code clusters reflect real patterns</div></div>
+        </div>
+        <div class="fb"><i class="ti ti-refresh" aria-hidden="true" style="font-size:16px;flex-shrink:0"></i><span>Continuous feedback loop, all three embedding spaces update with every resolved decision.</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="prose">
+    <h2>The hard part is not the technology</h2>
+    <p>The architecture is solvable. The business problem is harder.</p>
+    <p>Both sides have to simultaneously disarm for this to work. The hospital that is winning some billing fights has no individual incentive to give up their AI weapon. The insurer profiting from systematic denial has no individual incentive to pay more accurately.</p>
+    <p>There are really only three realistic adoption paths:</p>
+    <ul>
+      <li><strong>Employers forcing it.</strong> Large self-insured employers like Amazon, Walmart, and GM write the healthcare check directly. If they demand their hospital networks use neutral adjudication, hospitals comply or lose those contracts.</li>
+      <li><strong>Government mandating it.</strong> CMS requiring neutral adjudication for Medicare and Medicaid claims would accelerate everything. But political will moves slowly.</li>
+      <li><strong>Proving it in narrow domains.</strong> Start with one claim type where both sides lose the most in fighting. NICU bills are a good example. Show that neutral adjudication settles those faster, cheaper, and more accurately. Build trust. Expand.</li>
+    </ul>
+    <p>The technical solution is ready to be built. The economic and regulatory conditions that would let it scale are still catching up.</p>
+
+    <h2>Where this goes</h2>
+    <p>The arms race framing is right. But here is what it misses: the ultimate cost of this war is paid by patients who had nothing to do with starting it.</p>
+    <p>The damage does not stop at the bill. Patients who receive a $550,000 installment plan tend to disengage quietly. They skip follow-up visits. They do not fill prescriptions. They decide the system is not worth fighting and disappear. When they reappear, their conditions have often progressed. The financial side effects of care have become clinical ones.</p>
+    <p>That woman running red lights through Orlando at midnight was not thinking about ICD codes. She was thinking about her son surviving. And he did survive. Fifty-six days in the NICU, which is genuinely heroic medicine.</p>
+    <p>The $550,000 bill is what happened when two AI systems got done arguing over the charts of that heroic medicine. Neither one was asking whether the amount was fair. Neither one knew her name.</p>
+    <p>Bisi Bennett&#39;s family got their story told. Most families do not. Building a system that settles what care costs before the patient ever sees a bill is not just a technical problem. It is what healthcare AI should actually be for.</p>
+
+    <blockquote><p>Working on the intersection of ML, healthcare, and AI systems? I would love to connect and hear how you are thinking about this space.</p></blockquote>
+
+    <div class="sources">
+      <div class="src-t">Sources</div>
+      <p>STAT News / Machinify, Darshak Sanghavi, June 2026</p>
+      <p>Experian Health State of Claims 2025</p>
+      <p>HFMA Battle of the bots 2024</p>
+      <p>Aspirion RCM Insights 2025</p>
+      <p>American Hospital Association Cost of Caring 2025</p>
+    </div>
+  </div>
+
+  <div class="blog-footer">
+    <a href="/">&#8592; Back to portfolio</a>
+  </div>
+</div>
+
+<script>
+function toggleTheme(){
+  const h=document.documentElement;
+  const dark=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('ticon').className=dark?'ti ti-moon':'ti ti-sun';
+}
+</script>
+</body>
+</html>
